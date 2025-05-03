@@ -19,9 +19,9 @@ namespace RestApi.Models
         [Required, StringLength(100)]// Inte för mycket text nåå
         public string Jobbbeskrivning { get; set; }
 
-        public DateTime Jobbstart { get; set; }
+        public DateOnly Jobbstart { get; set; }
 
-        public DateTime Jobbslut { get; set; }
+        public DateOnly Jobbslut { get; set; }
 
         [ForeignKey("Person")]
         public int PerosonID_FK { get; set; }

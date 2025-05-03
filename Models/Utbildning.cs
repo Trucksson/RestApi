@@ -15,9 +15,9 @@ namespace RestApi.Models
 
         public string UtbildningExamen { get; set; }
 
-        public DateTime UtbildningStart { get; set; }
+        public DateOnly UtbildningStart { get; set; }
 
-        public DateTime UtbildningSlut { get; set; }
+        public DateOnly UtbildningSlut { get; set; }
 
         [ForeignKey("Person")]
         public int PersonID_FK { get; set; }
