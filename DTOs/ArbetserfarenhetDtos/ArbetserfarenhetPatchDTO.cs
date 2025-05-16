@@ -15,6 +15,6 @@ namespace RestApi.DTOs.ArbetserfarenhetDtos
         [DataType(DataType.Date, ErrorMessage = "Måste ha rätt start datum")]
         public DateOnly Jobbstart { get; set; }
         [DataType(DataType.Date, ErrorMessage ="Måste ha rätt slut datum")]
-        public DateOnly? Jobbslut { get; set; }
+        public DateOnly Jobbslut { get; set; }
     }
 }

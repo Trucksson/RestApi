@@ -2,7 +2,7 @@
 
 namespace RestApi.DTOs.UtbildningDtos
 {
-    public class UtbldningPutDTO
+    public class UtbildningPutDTO
     {
         public int PersonID { get; set; }
         [Required(ErrorMessage = "Saknar namn till skolan, det behövs")]
@@ -15,6 +15,6 @@ namespace RestApi.DTOs.UtbildningDtos
         [Required(ErrorMessage = "Saknar info om startdatum"), DataType(DataType.Date)]
         public DateOnly UtbildningStart { get; set; }
         [Required(ErrorMessage = "Saknar info om slutdatum"), DataType(DataType.Date)]
-        public DateOnly? UtbildningSlut { get; set; }
+        public DateOnly UtbildningSlut { get; set; }
     }
 }

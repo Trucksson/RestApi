@@ -26,6 +26,6 @@ namespace RestApi.Models
         [ForeignKey("Person")]
         public int PerosonID_FK { get; set; }
         public virtual Person Person { get; set; } // FK relation till Person
-
+        public int PersonId_FK { get; internal set; }
     }
 }

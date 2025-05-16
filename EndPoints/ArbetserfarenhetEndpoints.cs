@@ -91,11 +91,112 @@ namespace RestApi.EndPoints
                 catch (Exception)
                 {
 
-                    //TODO:Felmeddelande
+                    return Results.Json("Ett fel inträffade när arbetserfarenhet skulle skapas");
                 }
 
             });
-                
+
+            app.MapPut("/arbetserfarenhet/{id}", async (CVContext context, int id, ArbetserfarenhetPutDTO updatedArbetserfarenhet) =>
+            {
+                if (id <= 0)
+                {
+                    return Results.BadRequest(new { message = "ID kan inte vara mindre än 1" });
+                }
+                try
+                {
+                    var arbetserfarenhet = await context.Arbetserfarenheter.FindAsync(id);
+                    if (arbetserfarenhet == null)
+                    {
+                        return Results.NotFound(new { message = "Arbetserfarenhet inte hittad" });
+                    }
+                    arbetserfarenhet.Företag = updatedArbetserfarenhet.Företag;
+                    arbetserfarenhet.Jobbtitel = updatedArbetserfarenhet.Jobbtitel;
+                    arbetserfarenhet.Jobbbeskrivning = updatedArbetserfarenhet.Jobbbeskrivning;
+                    arbetserfarenhet.Jobbstart = updatedArbetserfarenhet.Jobbstart;
+                    arbetserfarenhet.Jobbslut = updatedArbetserfarenhet.Jobbslut;
+                    await context.SaveChangesAsync();
+                    return Results.Ok(new { message = "Arbetserfarenhet uppdaterad", arbetserfarenhet });
+                }
+                catch (Exception)
+                {
+                    return Results.Json("Ett fel inträffade när arbetserfarenhet skulle uppdateras");
+                }
+            }).WithName("Uppdatera Arbetserfarenhet");
+
+
+            app.MapPatch("/arbetserfarenhet/{id}", async (CVContext context, ArbetserfarenhetPatchDTO arbetserfarenhetDto, int id) =>
+            {
+                if (id <= 0)
+                {
+                    return Results.BadRequest(new { message = "ID kan inte vara mindre än 1" });
+                }
+
+                try
+                {
+                    var arbetserfarenhet = await context.Arbetserfarenheter
+                    .FirstOrDefaultAsync(a => a.ArbetserfarenhetID == id);
+
+                    if (arbetserfarenhet == null)
+                    {
+                        return Results.NotFound(new { message = "Arbetserfarenhet inte hittad" });
+                    }
+
+                    if (arbetserfarenhetDto.Företag != null)
+                    {
+                        arbetserfarenhet.Företag = arbetserfarenhetDto.Företag;
+                    }
+                    if (arbetserfarenhetDto.Jobbtitel != null)
+                    {
+                        arbetserfarenhet.Jobbtitel = arbetserfarenhetDto.Jobbtitel;
+                    }
+                    if (arbetserfarenhetDto.Jobbbeskrivning != null)
+                    {
+                        arbetserfarenhet.Jobbbeskrivning = arbetserfarenhetDto.Jobbbeskrivning;
+                    }
+                    if (arbetserfarenhetDto.Jobbstart != null)
+                    {
+                        arbetserfarenhet.Jobbstart = arbetserfarenhetDto.Jobbstart;
+                    }
+                    if (arbetserfarenhetDto.Jobbslut != null)
+                    {
+                        arbetserfarenhet.Jobbslut = arbetserfarenhetDto.Jobbslut;
+                    }
+
+                    await context.SaveChangesAsync();
+                    return Results.AcceptedAtRoute("Hämta arbetserfarenhet efter ID", new { id = arbetserfarenhet.PerosonID_FK}, arbetserfarenhet);
+                }
+                catch (Exception)
+                {
+                    return Results.Json("Ett fel inträffade när arbetserfarenhet skulle uppdateras");
+
+                }
+
+            });
+
+
+            app.MapDelete("/arbetserfarenhet/{id}", async (CVContext context, int id) =>
+            {
+                if (id <= 0)
+                {
+                    return Results.BadRequest(new { message = "ID kan inte vara mindre än 1" });
+                }
+                try
+                {
+                    var arbetserfarenhet = await context.Arbetserfarenheter.FindAsync(id);
+                    if (arbetserfarenhet == null)
+                    {
+                        return Results.NotFound(new { message = "Arbetserfarenhet inte hittad" });
+                    }
+                    context.Arbetserfarenheter.Remove(arbetserfarenhet);
+                    await context.SaveChangesAsync();
+                    return Results.Ok(new { message = "Arbetserfarenhet borttagen" });
+                }
+                catch (Exception)
+                {
+                    return Results.Json("Ett fel inträffade när arbetserfarenhet skulle tas bort");
+                }
+            }).WithName("Ta bort Arbetserfarenhet");
+
 
         }
     }

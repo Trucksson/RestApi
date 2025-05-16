@@ -20,7 +20,8 @@ namespace RestApi.Models
         public DateOnly UtbildningSlut { get; set; }
 
         [ForeignKey("Person")]
-        public int PersonID_FK { get; set; }
+        public int PersonId_FK { get; set; }
+
         public virtual Person Person { get; set; } // FK relation till Person
     }
 }
