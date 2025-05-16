@@ -6,6 +6,6 @@
         public string Jobbtitel { get; set; }
         public string Jobbbeskrivning { get; set; }
         public DateOnly Jobbstart { get; set; }
-        public DateOnly? Jobbslut { get; set; }
+        public DateOnly Jobbslut { get; set; }
     }
 }

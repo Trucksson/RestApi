@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using RestApi.Data;
+using RestApi.EndPoints;
 
 namespace RestApi
 {
@@ -24,12 +25,16 @@ namespace RestApi
                
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // 
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            PersonEndpoints.RegisterEndpoints(app);
+            UtbildningEndpoints.RegisterEndpoints(app);
+            GitHubEndPoints.RegisterEndpoints(app);
+            ArbetserfarenhetEndpoints.RegisterEndpoints(app);
 
             app.UseHttpsRedirection();
 

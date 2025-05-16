@@ -1,6 +1,6 @@
 ﻿namespace RestApi.DTOs.UtbildningDtos
 {
-    public class UtblidningDTO
+    public class UtbildningDTO //Rättstavat gaaaaang 
     {
         public string Skola { get; set; }
         public string UtbildningBeskrivning { get; set; }

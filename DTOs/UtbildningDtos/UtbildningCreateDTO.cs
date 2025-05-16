@@ -2,11 +2,13 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace RestApi.DTOs.UtbildningDtos
 {
-    public class UtbliningCreateDTO
+    public class UtbildningCreateDTO
     {
-        public int PersonID { get; set; }
+        public int PersonId { get; set; }
+
 
         [Required(ErrorMessage = "Saknar namn till skolan, det behövs")]
         public string Skola { get; set; }
@@ -18,8 +20,9 @@ namespace RestApi.DTOs.UtbildningDtos
         [Required(ErrorMessage = "Saknar info om startdatum"), DataType(DataType.Date)]
         public DateOnly UtbildningStart { get; set; }
         [Required(ErrorMessage = "Saknar info om slutdatum"), DataType(DataType.Date)]
-        public DateOnly? UtbildningSlut { get; set; }
+        public DateOnly UtbildningSlut { get; set; }
 
-        
+
+
     }
 }
